@@ -1,7 +1,7 @@
-CC=g++
+CC=cc
 #CC=i686-w64-mingw32-g++
 #FLAGS32=-m32
-STATIC=-static -static-libgcc -static-libstdc++
+#STATIC=-static -static-libgcc -static-libstdc++
 CCFLAGS=$(FLAGS32) $(STATIC) -Wall -O2 -fpermissive -Wunused-variable
 OUT=dsktool
 #OUT=dsktool.exe
