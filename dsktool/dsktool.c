@@ -291,7 +291,7 @@ fileinfo_t *getfileinfo (uint16_t entrypos) {
 	// Filter entries by name
 	char *name = (char *)dir->name;
 	for (i=0; i<11; i++) {
-		if (*name < 0x20 || *name >= 0x80) return NULL;
+		if (*name < 0x20 || (*name & 0x80)) return NULL;
 		name++;
 	}
 
@@ -415,7 +415,7 @@ void list_advhdsk (void) {
 	printf ("Name of volume:   %s\n\n",name);
 	for (i=0; i<190; i++) {
 		file = getfileinfoadvh(i);
-		if (file->name[0]==0xFF) break;
+		if ((unsigned char)file->name[0]==0xFF) break;
 		printf ("%-8s.%-3s   [Diskfile Offset:%7d]  %7u bytes\n", file->name, file->ext, file->first, file->size);
 	}
 	puts("");
@@ -655,7 +655,7 @@ void add_single_file(char *name, char *pathname) {
 	//Search first empty directory entry
 	dir = rootdir;
 	for (i=0; i<bootsec->maxDirectoryEntries; i++) {
-		if (dir->name[0]<0x20 || dir->name[0]>=0x80) {
+		if (dir->name[0]<0x20 || (dir->name[0] & 0x80)) {
 			break;
 		}
 		dir++;
