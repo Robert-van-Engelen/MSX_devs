@@ -3,7 +3,6 @@
 #include <stdint.h>
 #include <unistd.h>
 #include <ctype.h>
-#include <malloc.h>
 #include <string.h>
 #include <time.h>
 #include <libgen.h>
